@@ -20,5 +20,13 @@ pipeline {
                 sh 'docker build -t petclinic-app .'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                sh 'docker stop petclinic-container || true'
+                sh 'docker rm petclinic-container || true'
+                sh 'docker run -d -p 8082:8080 --name petclinic-container petclinic-app'
+            }
+        }
     }
 }
