@@ -21,6 +21,12 @@ pipeline {
             }
         }
 
+        stage('Security Scan') {
+            steps {
+                sh 'trivy image petclinic-app'
+            }
+        }
+
         stage('Deploy') {
             steps {
                 sh 'docker stop petclinic-container || true'
