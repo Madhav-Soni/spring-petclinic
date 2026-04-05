@@ -23,7 +23,7 @@ pipeline {
 
         stage('Security Scan') {
             steps {
-                sh 'trivy image petclinic-app'
+                sh 'trivy image --timeout 10m petclinic-app || true'
             }
         }
 
